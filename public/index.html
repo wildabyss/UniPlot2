@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- content type -->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="Content-Style-Type" content="text/css">
+		
+		<!-- layout and styles -->
+		<title>UniPlot</title>
+		<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="./css/bootstrap-theme.min.css" type="text/css" media="screen">
+	</head>
+	<body>
+		<!-- jQuery and jQuery-UI -->
+		<script src="./js/jquery.min.js"></script>
+		<script src="./js/bootstrap.min.js"></script>
+		<!-- Anpur's LineNavigator class for reading File line by line -->
+		<script src="./js/LineNavigator/file-wrapper.min.js"></script>
+		<script src="./js/LineNavigator/line-navigator.min.js"></script>	
+		
+		<script src="./js/utils.js"></script>
+		<script src="./js/basic-ui.js"></script>
+		<script src="./js/plot_data.js"></script>
+		<script src="./js/plotter.js"></script>
+		
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">UniPlot</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Data Sources</a></li>
+								<li><a href="#">Plotting</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Session</a></li>
+								<li><a href="#">Template</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Session</a></li>
+								<li><a href="#">Template</a></li>
+								<li><a href="#">PDF</a></li>
+							</ul>
+						</li>
+						<li><a href="#">Annotate</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zoom <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">X-Axis</a></li>
+								<li><a href="#">Y-Axis</a></li>
+								<li><a href="#">Revert</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</nav>
+	</body>
+</html>
