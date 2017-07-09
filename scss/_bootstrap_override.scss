@@ -1,0 +1,21 @@
+body{
+	padding-top: 70px;
+}
+
+nav{
+	.navbar-form{
+		margin-top: 10px;
+	}
+
+	@media (max-width: 767px) {
+		.navbar-form{
+			margin-top: 0;
+			margin-bottom: 0;
+			border: 0;
+		}
+		
+		.navbar-toggle{
+			margin-left: 5px;
+		}
+	}
+}
