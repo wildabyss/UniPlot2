@@ -1,0 +1,5 @@
+/test/*
+/vendor/*
+
+/public/js/*.js
+/public/css/my.css
