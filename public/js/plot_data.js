@@ -15,6 +15,14 @@ function DataSource(active) {
 	this.active = active;
 }
 
+DataSource.prototype.shallowCopy = function () {
+	return {
+		file: this.file,
+		fields: this.fields.slice(),
+		active: this.active
+	};
+};
+
 /**
  * PlotParameters class
  */

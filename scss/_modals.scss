@@ -1,0 +1,25 @@
+.modal-dialog{
+	fieldset{
+		border: 1px solid gray;
+		border-radius: 3px;
+		border-color: #2e6da4;
+		min-height: 200px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		
+		.row.small{
+			margin-bottom: 2px;
+		
+			.col-xs-12{
+				display: flex;
+				padding-left: 5px;
+				padding-right: 5px;
+				height: 38px;
+			
+				ul.list-group.checked-list-box{
+					flex:1;
+				}
+			}
+		}
+	}
+}

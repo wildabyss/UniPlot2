@@ -15,11 +15,11 @@ function DataSource(active){
 }
 
 DataSource.prototype.shallowCopy = function(){
-	return {
+	return ({
 		file: this.file,
 		fields: this.fields.slice(),
 		active: this.active,
-	};
+	});
 };
 
 

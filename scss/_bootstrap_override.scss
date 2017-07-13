@@ -19,3 +19,28 @@ nav{
 		}
 	}
 }
+
+
+// needed for React-Bootstrap
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
+
+// checkbox
+.state-icon {
+    left: -5px;
+}
+.list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+}
+
+
+// turn off transition
+.progress-bar{
+	transition: none;
+}

@@ -328,7 +328,20 @@ var Plotter = function () {
 	return {
 		// Array of PlotParameters objects
 		plot_parameters_array: [],
-		data_sources: {},
+		// DataSource objects
+		data_sources: {
+			shallowCopy: function shallowCopy() {
+				var clone = {};
+
+				for (var file_name in this) {
+					if (this[file_name] instanceof DataSource) {
+						clone[file_name] = this[file_name].shallowCopy();
+					}
+				}
+
+				return clone;
+			}
+		},
 
 		accepted_extensions: _accepted_extensions,
 
@@ -441,7 +454,7 @@ var Plotter = function () {
    * fn_complete: function handle to perform after reading finished
    * file_ind: optional, required if file == array of File objects
    */
-		read: function read(files, fn_reading, fn_complete, file_ind) {
+		read: function read(files, react_component, fn_reading, fn_complete, file_ind) {
 			if (!(window.File && window.FileReader && window.FileList && window.Blob)) throw "Unsupported browser";
 
 			var file = files instanceof Array ? files[file_ind] : files;
@@ -460,8 +473,8 @@ var Plotter = function () {
 				// Custom function handle while reading data
 				if (files instanceof Array) {
 					var chunk_prog = 100 / files.length;
-					fn_reading(chunk_prog * file_ind + progress / 100 * chunk_prog);
-				} else fn_reading(progress);
+					fn_reading(react_component, chunk_prog * file_ind + progress / 100 * chunk_prog);
+				} else fn_reading(react_component, progress);
 
 				// Reading lines
 				for (var i = 0; i < lines.length; i++) {
@@ -477,9 +490,9 @@ var Plotter = function () {
 				// End of file
 				if (isEof) {
 					if (files instanceof Array) {
-						fn_complete(files, file_ind);
+						fn_complete(react_component, files, file_ind);
 					} else {
-						fn_complete();
+						fn_complete(react_component);
 					}
 					return;
 				}

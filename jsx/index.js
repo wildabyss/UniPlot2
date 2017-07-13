@@ -1,13 +1,3 @@
-class SourceModal extends React.Component{
-	constructor(props) {
-		super(props);
-		
-		this.state = {
-			shallow_data_sources: props.dataSources,
-		};
-	}
-}
-
 $(document).ready(function () {
-	
+	ReactDOM.render(<DataModal dataSources={Plotter.data_sources.shallowCopy()} />, $("#data_modal .modal-body")[0]);
 });

@@ -13,22 +13,22 @@
 		<link rel="stylesheet" href="./css/my.css" type="text/css" media="screen">
 	</head>
 	<body>
-		<!-- jQuery -->
+		<!-- jQuery and Bootstrap -->
 		<script src="./js/jQuery/jquery.min.js"></script>
 		<script src="./js/bootstrap/bootstrap.min.js"></script>
 		<!-- ReactJS -->
 		<script src="./js/react/react.js"></script>
 		<script src="./js/react/react-dom.js"></script>
-		<script src="./js/react/react-bootstrap.js"></script>
 		<!-- Anpur's LineNavigator class for reading File line by line -->
 		<script src="./js/LineNavigator/file-wrapper.min.js"></script>
 		<script src="./js/LineNavigator/line-navigator.min.js"></script>	
 		
-		<script src="./js/index.js"></script>
-		<!--<script src="./js/utils.js"></script>
-		<script src="./js/basic-ui.js"></script>
+		<script src="./js/utils.js"></script>
 		<script src="./js/plot_data.js"></script>
-		<script src="./js/plotter.js"></script>-->
+		<script src="./js/plotter.js"></script>
+		<script src="./js/checkbox.js"></script>
+		<script src="./js/data_modal.js"></script>
+		<script src="./js/index.js"></script>
 		
 		<div class="container">
 			<nav class="navbar navbar-default navbar-fixed-top">
@@ -53,7 +53,7 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data <span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#" type="button">Data Sources</a></li>
+									<li><a href="#" type="button"  data-toggle="modal" data-target="#data_modal">Data Sources</a></li>
 									<li><a href="#" type="button">Plotting</a></li>
 								</ul>
 							</li>
@@ -72,7 +72,7 @@
 									<li><a href="#" type="button">PDF</a></li>
 								</ul>
 							</li>
-							<li><a href="#" id="hello" type="button" data-toggle="modal" data-target="#myModal">Annotate</a></li>
+							<li><a href="#" id="hello" type="button">Annotate</a></li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zoom <span class="caret"></span></a>
 								<ul class="dropdown-menu">
@@ -87,25 +87,20 @@
 			</nav>
 			
 			<main>
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+				<div class="modal fade" id="data_modal" tabindex="-1" role="dialog">
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<h4 class="modal-title">Modal title</h4>
 							</div>
-							<div class="modal-body">
-								<p>One fine body&hellip;</p>
-							</div>
+							<div class="modal-body"></div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary">Save changes</button>
 							</div>
 						</div><!-- /.modal-content -->
 					</div><!-- /.modal-dialog -->
 				</div><!-- /.modal -->
-			
-				<div id="root"></div>
 			</main>
 		</div>
 	</body>
