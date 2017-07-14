@@ -65,7 +65,7 @@ class DataModal extends React.Component{
 				<DataModalDataRow key={id} fileName={file_name} 
 					remove={this.removeFile.bind(this, file_name)}
 					select={this.selectFile.bind(this, file_name)}
-					checked={this.state.shallow_data_sources[file_name].active} />
+					selected={this.state.shallow_data_sources[file_name].active} />
 			);
 		};
 
@@ -115,7 +115,7 @@ class DataModalDataRow extends React.Component{
 			<div className="row small">
 				<div className="col-xs-12">
 					<ul className="list-group checked-list-box">
-						<li className="list-group-item" data-checked={this.props.checked} onClick={this.props.select}>{this.props.fileName}</li>
+						<li className="list-group-item" data-checked={this.props.selected} onClick={this.props.select}>{this.props.fileName}</li>
 					</ul>
 					<button className="btn btn-warning btn-sm" onClick={this.props.remove}><span className="glyphicon glyphicon-remove"></span></button>
 				</div>

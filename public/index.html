@@ -16,6 +16,7 @@
 		<!-- jQuery and Bootstrap -->
 		<script src="./js/jQuery/jquery.min.js"></script>
 		<script src="./js/bootstrap/bootstrap.min.js"></script>
+		<script src="./js/checkbox.js"></script>
 		<!-- ReactJS -->
 		<script src="./js/react/react.js"></script>
 		<script src="./js/react/react-dom.js"></script>
@@ -23,101 +24,19 @@
 		<script src="./js/LineNavigator/file-wrapper.min.js"></script>
 		<script src="./js/LineNavigator/line-navigator.min.js"></script>	
 		
+		<!-- Plotter -->
 		<script src="./js/utils.js"></script>
 		<script src="./js/plot_data.js"></script>
 		<script src="./js/plotter.js"></script>
-		<script src="./js/checkbox.js"></script>
+		
+		<!-- React components -->
 		<script src="./js/data_modal.js"></script>
 		<script src="./js/plotting_modal.js"></script>
+		<script src="./js/nav-component.js"></script>
+		<script src="./js/main-component.js"></script>
 		<script src="./js/index.js"></script>
 		
-		<div class="container">
-			<nav class="navbar navbar-default navbar-fixed-top">
-				<div class="container">
-					<div class="navbar-header navbar-left pull-left">
-						<button type="button" class="pull-left navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-							<span class="sr-only">Toggle navigation</span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">UniPlot</a>
-					</div>
-					<form class="navbar-form navbar-right pull-right">
-						<div class="form-group">
-							<button type="button" class="btn btn-success"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
-						</div>
-					</form>
-					<div class="visible-xs-block clearfix"></div>
-					<div class="navbar-collapse collapse" id="navbar">
-						<ul class="nav navbar-nav navbar-left">
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#" type="button" data-toggle="modal" data-target="#data_modal">Data Sources</a></li>
-									<li><a href="#" type="button" data-toggle="modal" data-target="#plotting_modal">Plotting</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Load <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#" type="button">Session</a></li>
-									<li><a href="#" type="button">Template</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Save <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#" type="button">Session</a></li>
-									<li><a href="#" type="button">Template</a></li>
-									<li><a href="#" type="button">PDF</a></li>
-								</ul>
-							</li>
-							<li><a href="#" id="hello" type="button">Annotate</a></li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Zoom <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#" type="button">X-Axis</a></li>
-									<li><a href="#" type="button">Y-Axis</a></li>
-									<li><a href="#" type="button">Revert</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-			
-			<main>
-				<div class="modal fade" id="data_modal" tabindex="-1" role="dialog">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title">Data Sources</h4>
-							</div>
-							<div class="modal-body"></div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="modal fade" id="plotting_modal" tabindex="-1" role="dialog">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title">Plotting</h4>
-							</div>
-							<div class="modal-body"></div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</main>
-		</div>
+		<!-- App container -->
+		<div class="container"></div>
 	</body>
 </html>
