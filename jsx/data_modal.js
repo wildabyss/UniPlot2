@@ -70,7 +70,7 @@ class DataModal extends React.Component{
 		};
 
 		return (
-			<div>
+			<div className="react-root">
 				<DataModalProgress progress={this.state.progress} />
 				<DataModalAddData onClick={this.addFileButton} progress={this.state.progress} />
 				<input id="file_add_data" className="hidden" type="file" onChange={this.addFile.bind(this)} value="" />
@@ -111,13 +111,11 @@ class DataModalAddData extends React.Component{
 
 class DataModalDataRow extends React.Component{
 	render(){
-		var checked = (this.props.checked?"1":"0");
-	
 		return (
 			<div className="row small">
 				<div className="col-xs-12">
 					<ul className="list-group checked-list-box">
-						<li className="list-group-item" data-checked={checked} onClick={this.props.select}>{this.props.fileName}</li>
+						<li className="list-group-item" data-checked={this.props.checked} onClick={this.props.select}>{this.props.fileName}</li>
 					</ul>
 					<button className="btn btn-warning btn-sm" onClick={this.props.remove}><span className="glyphicon glyphicon-remove"></span></button>
 				</div>

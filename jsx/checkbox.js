@@ -44,6 +44,8 @@ $.fn.extend({
 				$widget.css('cursor', 'pointer')
 				if ($widget.find('input[type="checkbox"]').length==0)
 					$widget.append($checkbox);
+				else
+					$checkbox = $widget.find('input[type="checkbox"]');
 
 				// Event Handlers
 				$widget.on('click', function () {
@@ -55,8 +57,9 @@ $.fn.extend({
 					updateDisplay();
 				});
 				
-				if ($widget.data('checked') == true) {
-					$checkbox.prop('checked', !$checkbox.is(':checked'));
+				// Set checkbox based on property
+				if ($widget.attr('data-checked') == "true") {
+					$checkbox.prop('checked', true);
 				}
 				
 				updateDisplay();
