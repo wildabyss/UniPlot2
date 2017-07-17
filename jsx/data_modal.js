@@ -4,7 +4,7 @@ class DataModal extends React.Component{
 		
 		this.state = {
 			progress: -1,
-			shallow_data_sources: props.dataSources,
+			shallow_data_sources: Plotter.data_sources.shallowCopy(),
 		};
 	};
 	
@@ -37,6 +37,10 @@ class DataModal extends React.Component{
 					shallow_data_sources: Plotter.data_sources.shallowCopy()
 				});
 				
+				// parent component handler
+				if (react_component.props.hasOwnProperty('addFile'))
+					react_component.props.addFile();
+				
 				// redraw plots
 				Plotter.redraw();
 			});
@@ -47,6 +51,10 @@ class DataModal extends React.Component{
 		this.setState({
 			shallow_data_sources: Plotter.data_sources.shallowCopy()
 		});
+		
+		// parent component handler
+		if (this.props.hasOwnProperty('removeFile'))
+			this.props.removeFile();
 	};
 	
 	selectFile(file_name){
@@ -54,6 +62,10 @@ class DataModal extends React.Component{
 		this.setState({
 			shallow_data_sources: Plotter.data_sources.shallowCopy()
 		});
+		
+		// parent component handler
+		if (this.props.hasOwnProperty('selectFile'))
+			this.props.selectFile();
 	};
 	
 	render(){
@@ -110,6 +122,10 @@ class DataModalAddData extends React.Component{
 }
 
 class DataModalDataRow extends React.Component{
+	componentWillUpdate(nextProps, nextState){
+		$("#data_modal .list-group.checked-list-box > .list-group-item").checkbox('unmount');
+	}
+	
 	render(){
 		return (
 			<div className="row small">

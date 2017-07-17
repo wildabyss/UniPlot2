@@ -43,3 +43,21 @@
 		}
 	}
 }
+
+#plotting_modal{
+	.modal-body{
+		.react-root{
+			.col-xs-12{
+				display: flex;
+				
+				select {
+					flex: 1;
+				}
+			}
+			
+			.xvar{
+				margin-top: 5px;
+			}
+		}
+	}
+}
