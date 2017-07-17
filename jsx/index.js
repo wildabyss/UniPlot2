@@ -1,12 +1,20 @@
 class UniPlotApp extends React.Component{
 	constructor(props) {
 		super(props);
+		
+		this.state={
+			refresh: 1,
+		}
+	};
+	
+	refresh(){
+		this.setState({refresh: 1});
 	};
 
 	render(){
 		return (
 			<div className="react-root">
-				<NavComponent />
+				<NavComponent refresh={this.refresh.bind(this)} />
 				<MainComponent />
 			</div>
 		);

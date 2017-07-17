@@ -40,9 +40,6 @@ class DataModal extends React.Component{
 				// parent component handler
 				if (react_component.props.hasOwnProperty('addFile'))
 					react_component.props.addFile();
-				
-				// redraw plots
-				Plotter.redraw();
 			});
 	};
 	

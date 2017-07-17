@@ -2,6 +2,9 @@ class MainComponent extends React.Component{
 	constructor(props) {
 		super(props);
 		
+		this.state = {
+			plot_parameters_array: Plotter.plot_parameters_array.slice(),
+		};
 		this.rebuildSortedParametersList(true);
 	};
 	
@@ -20,39 +23,23 @@ class MainComponent extends React.Component{
 		}
 		
 		if (is_construct){
-			this.state={
-				sorted_parameters_list: parameters_list,
-			};
+			this.state.sorted_parameters_list = parameters_list;
 		} else {
 			this.setState({
 				sorted_parameters_list: parameters_list,
 			});
 		}
-	}
+	};
 	
-	addFile(){
-		// parent component handler
-		if (this.props.hasOwnProperty('addFile'))
-			this.props.addFile();
-		
+	dataSourceChanged(){
 		this.rebuildSortedParametersList(false);
-	}
+	};
 	
-	removeFile(){
-		// parent component handler
-		if (this.props.hasOwnProperty('removeFile'))
-			this.props.removeFile();
-		
-		this.rebuildSortedParametersList(false);
-	}
-	
-	selectFile(){
-		// parent component handler
-		if (this.props.hasOwnProperty('selectFile'))
-			this.props.selectFile();
-		
-		this.rebuildSortedParametersList(false);
-	}
+	plotParametersChanged(){
+		this.setState({
+			plot_parameters_array: Plotter.plot_parameters_array.slice(),
+		});
+	};
 	
 	render(){
 		return (
@@ -65,7 +52,7 @@ class MainComponent extends React.Component{
 								<h4 className="modal-title">Data Sources</h4>
 							</div>
 							<div className="modal-body">
-								<DataModal addFile={this.addFile.bind(this)} removeFile={this.removeFile.bind(this)} selectFile={this.selectFile.bind(this)} />
+								<DataModal addFile={this.dataSourceChanged.bind(this)} removeFile={this.dataSourceChanged.bind(this)} selectFile={this.dataSourceChanged.bind(this)} />
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -82,7 +69,9 @@ class MainComponent extends React.Component{
 								<h4 className="modal-title">Plotting</h4>
 							</div>
 							<div className="modal-body">
-								<PlottingModal sortedParametersList={this.state.sorted_parameters_list} />
+								<PlottingModal sortedParametersList={this.state.sorted_parameters_list}
+									addPlot={this.plotParametersChanged.bind(this)} editPlotTitle={this.plotParametersChanged.bind(this)} 
+									removePlot={this.plotParametersChanged.bind(this)} parametersChanged={this.plotParametersChanged.bind(this)} />
 							</div>
 							<div className="modal-footer">
 								<button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
@@ -90,6 +79,8 @@ class MainComponent extends React.Component{
 						</div>
 					</div>
 				</div>
+				
+				<CanvasCollection />
 			</main>
 		);
 	};

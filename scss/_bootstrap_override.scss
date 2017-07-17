@@ -47,3 +47,10 @@ nav{
 .progress-bar{
 	transition: none;
 }
+
+// button size
+label.btn-mini{
+	font-size: 85%;
+	padding: 8px 12px;
+	line-height: normal;
+}

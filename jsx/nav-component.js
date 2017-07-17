@@ -1,4 +1,34 @@
 class NavComponent extends React.Component{
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			progress: -1,
+		};
+	};
+
+	refresh(){
+		Plotter.reload(this,
+			function(react_component, progress){
+				// on reading function
+			
+				react_component.setState({
+					progress: progress
+				});
+			}, 
+			function(react_component){
+				// complete function
+						
+				react_component.setState({
+					progress: -1,
+				});
+				
+				// parent component handler
+				if (react_component.props.hasOwnProperty('refresh'))
+					react_component.props.refresh();
+			});
+	};
+
 	render(){
 		return (
 			<nav className="navbar navbar-default navbar-fixed-top">
@@ -14,7 +44,7 @@ class NavComponent extends React.Component{
 					</div>
 					<form className="navbar-form navbar-right pull-right">
 						<div className="form-group">
-							<button type="button" className="btn btn-success"><span className="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+							<button type="button" className="btn btn-success" onClick={this.refresh.bind(this)}><span className="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
 						</div>
 					</form>
 					<div className="visible-xs-block clearfix"></div>

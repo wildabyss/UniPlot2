@@ -45,8 +45,6 @@ $.fn.extend({
 					$widget.css('cursor', 'pointer')
 					if ($widget.find('input[type="checkbox"]').length==0)
 						$widget.append($checkbox);
-					else
-						$checkbox = $widget.find('input[type="checkbox"]');
 
 					// Event Handlers
 					$widget.on('click', function () {
@@ -72,8 +70,8 @@ $.fn.extend({
 				})();
 			});
 		} else if (action == 'unmount'){
-			// remove events
-			$(this).off();
+			// remove events and checkbox
+			$(this).off().find('input[type="checkbox"]').remove();
 		}
 	}
 });

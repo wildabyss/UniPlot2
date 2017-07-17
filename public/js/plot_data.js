@@ -79,8 +79,18 @@ PlotParameters.prototype.removeParameter = function (data_sources, parameter_nam
 	if (this.parameters[parameter_name].is_primary) this.size_primary--;else this.size_secondary--;
 	delete this.parameters[parameter_name];
 
+	// reset xvar
+	if (this.xvar == parameter_name) {
+		this.setXVar(Plotter.data_sources, 'time');
+	}
+
 	// rezoom
 	this.revertZoom(data_sources);
+};
+
+PlotParameters.prototype.setXVar = function (data_sources, parameter_name) {
+	this.xvar = parameter_name;
+	this.addParameter(Plotter.data_sources, parameter_name, '', true);
 };
 
 /**
@@ -99,8 +109,10 @@ PlotParameters.prototype.setSecVerticalZoom = function (min, max) {
 	this.sec_vert_zoom[1] = max;
 };
 PlotParameters.prototype.setZoomOnParameter = function (data_sources, parameter_name) {
-	for (source_name in data_sources) {
-		data_source = data_sources[source_name];
+	for (var source_name in data_sources) {
+		if (typeof data_sources[source_name] === 'function') continue;
+
+		var data_source = data_sources[source_name];
 
 		// check parameter exists in source
 		if (!data_source.data.hasOwnProperty(parameter_name)) continue;
@@ -128,7 +140,7 @@ PlotParameters.prototype.revertZoom = function (data_sources, horizontal_only) {
 		this.setSecVerticalZoom(0, 0);
 	}
 
-	for (parameter_name in this.parameters) {
+	for (var parameter_name in this.parameters) {
 		if (horizontal_only == undefined || horizontal_only && parameter_name == this.xvar || !horizontal_only && parameter_name != this.xvar) this.setZoomOnParameter(data_sources, parameter_name);
 	}
 };
