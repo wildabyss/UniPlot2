@@ -4,6 +4,7 @@ class PlottingModal extends React.Component{
 		
 		this.state = {
 			selected: 0,
+			edit_title: false,
 			plot_parameters_array: Plotter.plot_parameters_array.slice(),
 			sorted_parameters_list: props.sortedParametersList,
 		};
@@ -42,11 +43,30 @@ class PlottingModal extends React.Component{
 	};
 	
 	editPlotTitle(){
+		if (this.state.selected >= 0 && Plotter.plot_parameters_array.length > 0){
+			this.setState({
+				edit_title: true,
+			});
+		}
+	};
 	
-	
-	
+	savePlotTitle(){
+		var title = $("input#plot_title").val();
+		Plotter.plot_parameters_array[this.state.selected].title = title;
+		
+		this.setState({
+			plot_parameters_array: Plotter.plot_parameters_array.slice(),
+			edit_title: false,
+		});
+		
 		if (this.props.hasOwnProperty('editPlotTitle'))
 			this.props.editPlotTitle();
+	};
+	
+	cancelPlotTitle(){
+		this.setState({
+			edit_title: false
+		});
 	};
 	
 	removePlot(){
@@ -144,9 +164,14 @@ class PlottingModal extends React.Component{
 	
 		return (
 			<div className="react-root">
-				<PlottingModalSelector 
-					add={this.addPlot.bind(this)} edit={this.editPlotTitle.bind(this)} remove={this.removePlot.bind(this)}
-					select={this.selectPlot.bind(this)} selected={this.state.selected} />
+				{this.state.edit_title ? (
+					<PlottingModalEditTitle title={this.state.plot_parameters_array[this.state.selected].title} 
+						save={this.savePlotTitle.bind(this)} cancel={this.cancelPlotTitle.bind(this)} />
+				) : (
+					<PlottingModalSelector 
+						add={this.addPlot.bind(this)} edit={this.editPlotTitle.bind(this)} remove={this.removePlot.bind(this)}
+						select={this.selectPlot.bind(this)} selected={this.state.selected} />
+				)}
 				<fieldset>
 					<div className="container-fluid">
 						{fieldsetChildren}
@@ -183,6 +208,20 @@ class PlottingModalSelector extends React.Component{
 			</div>
 		);
 	}
+}
+
+class PlottingModalEditTitle extends React.Component{
+	render(){
+		return (
+			<div className="row small">
+				<div className="col-xs-12">
+					<input className="form-control" type="text" id="plot_title" defaultValue={this.props.title} />
+					<button className="btn btn-success btn-sm" onClick={this.props.save}><span className="glyphicon glyphicon-ok"></span></button>
+					<button className="btn btn-warning btn-sm" onClick={this.props.cancel}><span className="glyphicon glyphicon-remove"></span></button>
+				</div>
+			</div>
+		);
+	};
 }
 
 class PlottingModalParameter extends React.Component{
