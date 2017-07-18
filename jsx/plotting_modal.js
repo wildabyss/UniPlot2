@@ -10,6 +10,7 @@ class PlottingModal extends React.Component{
 	};
 	
 	componentWillReceiveProps(nextProps){
+		// receive updated sorted list from parent
 		this.setState({
 			sorted_parameters_list: nextProps.sortedParametersList,
 		});
@@ -80,9 +81,18 @@ class PlottingModal extends React.Component{
 		}
 	};
 	
-	axisSelect(param_name){
-		//plot_parameters_array[this.state.selected].parameters[param_name].
-		console.log(param_name);
+	axisSelect(param_name, id){
+		if (this.state.selected >= 0 && Plotter.plot_parameters_array.length > 0){
+			// update the relevant parameter
+			if (param_name in Plotter.plot_parameters_array[this.state.selected].parameters) {
+				Plotter.plot_parameters_array[this.state.selected].removeParameter(Plotter.data_sources, param_name);
+				Plotter.plot_parameters_array[this.state.selected].addParameter(Plotter.data_sources, param_name, '', $("input#"+id).prop("checked"));
+			}
+		}
+		
+		this.setState({
+			plot_parameters_array: Plotter.plot_parameters_array.slice(),
+		});
 		
 		if (this.props.hasOwnProperty('parametersChanged'))
 			this.props.parametersChanged();
@@ -109,7 +119,7 @@ class PlottingModal extends React.Component{
 		
 		for (var i=0; i<this.state.sorted_parameters_list.length; i++){
 			var this_param_name = this.state.sorted_parameters_list[i];
-			if (this_param_name == 'time' || this_param_name == plot_parameters.xvar)
+			if (this_param_name == 'time' || (plot_parameters !== undefined && this_param_name == plot_parameters.xvar))
 				continue;
 				
 			var selected = false, is_primary = true;
@@ -123,10 +133,11 @@ class PlottingModal extends React.Component{
 				}
 			}
 			
+			var id="axis-toggle-"+i;
 			fieldsetChildren.push(
-				<PlottingModalParameter key={i} parameterName={this_param_name} 
+				<PlottingModalParameter key={i} id={id} parameterName={this_param_name} 
 					select={this.paramSelect.bind(this, this_param_name)}
-					axisSelect={this.axisSelect.bind(this, this_param_name)}
+					axisSelect={this.axisSelect.bind(this, this_param_name, id)}
 					selected={selected} isPrimary={is_primary} />
 			);
 		};
@@ -176,17 +187,29 @@ class PlottingModalSelector extends React.Component{
 
 class PlottingModalParameter extends React.Component{
 	componentWillUpdate(nextProps, nextState){
+		
+		// reinitialize checkboxes
 		$("#plotting_modal .list-group.checked-list-box > .list-group-item").checkbox('unmount');
 	};
 	
 	componentDidMount(){
-		$('#plotting_modal input[data-toggle="toggle"]').bootstrapToggle({
-			on: "Left Axis",
-			off: "Right Axis",
-			size: "mini",
-			height: 34,
-			width: 75,
-		});
+		// toggle button
+		$('#plotting_modal input#'+this.props.id)
+			.change(this.props.axisSelect)
+			.bootstrapToggle({
+				on: "Left Axis",
+				off: "Right Axis",
+				size: "mini",
+				height: 34,
+				width: 75,
+			});
+	};
+	
+	componentWillUnmount(){
+		// destroy toggle button
+		$('#plotting_modal input#'+this.props.id)
+			.off('change')
+			.bootstrapToggle('destroy');
 	};
 	
 	render(){
@@ -196,7 +219,7 @@ class PlottingModalParameter extends React.Component{
 					<ul className="list-group checked-list-box">
 						<li className="list-group-item" data-checked={this.props.selected} onClick={this.props.select}>{this.props.parameterName}</li>
 					</ul>
-					<input type="checkbox" data-toggle="toggle" checked={this.props.isPrimary} onChange={this.props.axisSelect} />
+					<input type="checkbox" data-toggle="toggle" id={this.props.id} checked={this.props.isPrimary} onChange={this.props.axisSelect} />
 				</div>
 			</div>
 		);
