@@ -44,8 +44,15 @@ nav{
 
 
 // turn off transition
-.progress-bar{
-	transition: none;
+.progress{
+	height: 25px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	
+	.progress-bar{
+		line-height: 25px;
+		transition: none;
+	}
 }
 
 // button size

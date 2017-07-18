@@ -26,7 +26,7 @@ class DataModal extends React.Component{
 				// on reading function
 			
 				react_component.setState({
-					progress: progress
+					progress: Math.round(progress)
 				});
 			}, 
 			function(react_component){
@@ -80,7 +80,7 @@ class DataModal extends React.Component{
 
 		return (
 			<div className="react-root">
-				<DataModalProgress progress={this.state.progress} />
+				<ProgressBar progress={this.state.progress} />
 				<DataModalAddData onClick={this.addFileButton} progress={this.state.progress} />
 				<input id="file_add_data" className="hidden" type="file" onChange={this.addFile.bind(this)} value="" />
 				<fieldset>
@@ -91,21 +91,6 @@ class DataModal extends React.Component{
 			</div>
 		);
 	};
-}
-
-class DataModalProgress extends React.Component{
-	render(){
-		var stylesMain = {display: (this.props.progress>0?"block":"none")};
-		var stylesSub = {width: this.props.progress.toString() + "%"};
-	
-		return (
-			<div className="progress" style={stylesMain}>
-				<div className="progress-bar" role="progressbar" aria-valuenow={this.props.progress} aria-valuemin="0" aria-valuemax="100" style={stylesSub}>
-					{this.props.progress}%
-				</div>
-			</div>
-		);
-	}
 }
 
 class DataModalAddData extends React.Component{

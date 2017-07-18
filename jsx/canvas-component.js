@@ -7,6 +7,17 @@ class CanvasCollection extends React.Component{
 		Plotter.redraw();
 	};
 	
+	componentDidMount(){
+		var react_elem = this;
+		$(window).resize(function(){
+			react_elem.forceUpdate();
+		});
+	};
+	
+	componentWillUnmount(){
+		$(window).off('resize');
+	};
+	
 	render(){
 		var plots = [];
 		for (var i=0; i<Plotter.plot_parameters_array.length; i++){

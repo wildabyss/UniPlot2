@@ -13,7 +13,7 @@ class NavComponent extends React.Component{
 				// on reading function
 			
 				react_component.setState({
-					progress: progress
+					progress: Math.round(progress)
 				});
 			}, 
 			function(react_component){
@@ -30,6 +30,8 @@ class NavComponent extends React.Component{
 	};
 
 	render(){
+		var stylesButton = {display: (this.state.progress>0?"none":"block")};
+		
 		return (
 			<nav className="navbar navbar-default navbar-fixed-top">
 				<div className="container">
@@ -43,7 +45,8 @@ class NavComponent extends React.Component{
 						<a className="navbar-brand" href="#">UniPlot</a>
 					</div>
 					<form className="navbar-form navbar-right pull-right">
-						<div className="form-group">
+						<ProgressBar progress={this.state.progress} width="100" />
+						<div className="form-group" style={stylesButton}>
 							<button type="button" className="btn btn-success" onClick={this.refresh.bind(this)}><span className="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
 						</div>
 					</form>

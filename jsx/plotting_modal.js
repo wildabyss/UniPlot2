@@ -92,7 +92,7 @@ class PlottingModal extends React.Component{
 		if (this.state.selected >= 0 && Plotter.plot_parameters_array.length > 0){
 			var param_name = $("select#sel_xvar").val();
 		
-			Plotter.plot_parameters_array[this.state.selected].xvar = param_name;
+			Plotter.plot_parameters_array[this.state.selected].setXVar(Plotter.data_sources, param_name);
 			
 			this.setState({
 				plot_parameters_array: Plotter.plot_parameters_array.slice(),
@@ -109,7 +109,7 @@ class PlottingModal extends React.Component{
 		
 		for (var i=0; i<this.state.sorted_parameters_list.length; i++){
 			var this_param_name = this.state.sorted_parameters_list[i];
-			if (this_param_name == 'time')
+			if (this_param_name == 'time' || this_param_name == plot_parameters.xvar)
 				continue;
 				
 			var selected = false, is_primary = true;
