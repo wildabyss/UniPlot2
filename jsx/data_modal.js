@@ -8,11 +8,6 @@ class DataModal extends React.Component{
 		};
 	};
 	
-	componentDidUpdate() {
-		// make checkboxes
-		$("#data_modal .list-group.checked-list-box > .list-group-item").checkbox();
-	};
-	
 	addFileButton(){
 		$("#file_add_data").click();
 	};
@@ -67,15 +62,19 @@ class DataModal extends React.Component{
 	
 	render(){
 		var fieldsetChildren = [];
+		var counter = 0;
 		for (var file_name in this.state.shallow_data_sources){
-			var id = file_name.replaceAll(' ', '-');
+			var key = file_name.replaceAll(' ', '-');
+			var id = "file_select_" + counter;
 		
 			fieldsetChildren.push(
-				<DataModalDataRow key={id} fileName={file_name} 
+				<DataModalDataRow key={key} id={id} fileName={file_name} 
 					remove={this.removeFile.bind(this, file_name)}
 					select={this.selectFile.bind(this, file_name)}
 					selected={this.state.shallow_data_sources[file_name].active} />
 			);
+			
+			counter++;
 		};
 
 		return (
@@ -105,15 +104,21 @@ class DataModalAddData extends React.Component{
 
 class DataModalDataRow extends React.Component{
 	componentWillUpdate(nextProps, nextState){
-		$("#data_modal .list-group.checked-list-box > .list-group-item").checkbox('unmount');
+		// reinitialize checkbox
+		$("#data_modal .list-group.checked-list-box > li#"+this.props.id).checkbox('unmount');
 	}
+	
+	componentDidUpdate(nextProps, nextState){
+		// make checkbox
+		$("#data_modal .list-group.checked-list-box > li#"+this.props.id).checkbox();
+	};
 	
 	render(){
 		return (
 			<div className="row small">
 				<div className="col-xs-12">
 					<ul className="list-group checked-list-box">
-						<li className="list-group-item" data-checked={this.props.selected} onClick={this.props.select}>{this.props.fileName}</li>
+						<li className="list-group-item" id={this.props.id} data-checked={this.props.selected} onClick={this.props.select}>{this.props.fileName}</li>
 					</ul>
 					<button className="btn btn-warning btn-sm" onClick={this.props.remove}><span className="glyphicon glyphicon-remove"></span></button>
 				</div>

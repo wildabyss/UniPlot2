@@ -17,11 +17,6 @@ class PlottingModal extends React.Component{
 		});
 	};
 	
-	componentDidUpdate() {
-		// make checkboxes
-		$("#plotting_modal .list-group.checked-list-box > .list-group-item").checkbox();
-	};
-	
 	selectPlot(){
 		this.setState({
 			selected: parseInt($('select#sel_plot').val()),
@@ -225,10 +220,37 @@ class PlottingModalEditTitle extends React.Component{
 }
 
 class PlottingModalParameter extends React.Component{
-	componentWillUpdate(nextProps, nextState){
+	constructor(props) {
+		super(props);
 		
-		// reinitialize checkboxes
-		$("#plotting_modal .list-group.checked-list-box > .list-group-item").checkbox('unmount');
+		this.state = {
+			is_primary: props.isPrimary,
+		};
+	};
+	
+	componentWillReceiveProps(nextProps){
+		// receive updated sorted list from parent
+		this.setState({
+			is_primary: nextProps.isPrimary,
+		});
+	};
+
+	componentWillUpdate(nextProps, nextState){
+		// reinitialize checkbox
+		$("#plotting_modal .list-group.checked-list-box > li#"+this.props.id).checkbox('unmount');
+		
+		// reinitialize toggle
+		$('#plotting_modal input#'+this.props.id).off('change');
+	};
+	
+	componentDidUpdate(nextProps, nextState){
+		if (this.state.is_primary)
+			$('#plotting_modal input#'+this.props.id).change(this.props.axisSelect).bootstrapToggle("silentOn");
+		else
+			$('#plotting_modal input#'+this.props.id).change(this.props.axisSelect).bootstrapToggle("silentOff");
+	
+		// make checkbox
+		$("#plotting_modal .list-group.checked-list-box > li#"+this.props.id).checkbox();
 	};
 	
 	componentDidMount(){
@@ -256,7 +278,7 @@ class PlottingModalParameter extends React.Component{
 			<div className="row small">
 				<div className="col-xs-12">
 					<ul className="list-group checked-list-box">
-						<li className="list-group-item" data-checked={this.props.selected} onClick={this.props.select}>{this.props.parameterName}</li>
+						<li className="list-group-item" id={this.props.id} data-checked={this.props.selected} onClick={this.props.select}>{this.props.parameterName}</li>
 					</ul>
 					<input type="checkbox" data-toggle="toggle" id={this.props.id} checked={this.props.isPrimary} onChange={this.props.axisSelect} />
 				</div>
